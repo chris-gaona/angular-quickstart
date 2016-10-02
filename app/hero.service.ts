@@ -9,7 +9,7 @@ import { Hero } from './hero';
 @Injectable()
 
 export class HeroService {
-    // private headers = new Headers({'Content-Type': 'application/json'});
+    private headers = new Headers({'Content-Type': 'application/json'});
     private heroesUrl = 'app/heroes'; // URL to web api
 
     private handleError(error: any): Promise<any> {
@@ -31,5 +31,15 @@ export class HeroService {
     getHero(id: number): Promise<Hero> {
         return this.getHeroes()
             .then(heroes => heroes.find(hero => hero.id === id));
+    }
+
+    update(hero: Hero): Promise<Hero> {
+        const url = `${this.heroesUrl}/${hero.id}`;
+
+        return this.http
+            .put(url, JSON.stringify(hero), {headers: this.headers})
+            .toPromise()
+            .then(() => hero)
+            .catch(this.handleError);
     }
 }
