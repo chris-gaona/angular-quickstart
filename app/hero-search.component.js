@@ -19,10 +19,6 @@ var HeroSearchComponent = (function () {
         this.router = router;
         this.searchTerms = new Subject_1.Subject();
     }
-    // Push a search term into the observable stream
-    HeroSearchComponent.prototype.search = function (term) {
-        this.searchTerms.next(term);
-    };
     HeroSearchComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.heroes = this.searchTerms

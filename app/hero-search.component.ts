@@ -23,11 +23,6 @@ export class HeroSearchComponent implements OnInit {
         private router: Router
     ) { }
 
-    // Push a search term into the observable stream
-    search(term: string): void {
-        this.searchTerms.next(term);
-    }
-
     ngOnInit(): void {
         this.heroes = this.searchTerms
             .debounceTime(300) // wait for 300ms pause in events
